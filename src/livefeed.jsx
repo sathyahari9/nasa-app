@@ -43,7 +43,7 @@ class LiveFeed extends Component{
           Current position tracking of the ISS
         </h1>
         <SimpleMap 
-        center = {props.center}
+        center={props.center}
         zoom={props.zoom}>
         </SimpleMap>
         <iframe width="480" height="270" src="https://www.ustream.tv/embed/9408562?html5ui" 
