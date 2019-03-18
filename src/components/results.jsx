@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ResultCards from './resultcards';
 import {Row} from 'reactstrap';
 import $ from 'jquery';
+import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 const pad = {
   padding: "2em",
@@ -23,59 +25,68 @@ class Results extends Component{
       meta: "",
       search: ""
     }
-    this.performSearch("moon");
-  }  
+  }
   findHref(href){
     var image = $.getJSON(href, "responseJSON");
     return image;
   }
-  performSearch(searchTerm){
-    const urlString = "https://images-api.nasa.gov/search?media_type=image&q=" + searchTerm;
+  performSearch(){
     var cardsHolder = []
-    $.ajax({
-      url: urlString,
-      success: (searchResults) => {
-        const metadata = searchResults.collection.metadata.total_hits
-        const results = searchResults.collection.items
-        const search = searchTerm
-        results.forEach((resultImage) => {
-          console.log(resultImage.links[0].href)
-          cardsHolder.push(
-            <ResultCards 
-            key= {resultImage.data[0].nasa_id}
-            id= {resultImage.data[0].nasa_id} 
-            media_type= {resultImage.data[0].media_type} 
-            image_href= {resultImage.links[0].href}
-            title= {resultImage.data[0].title}
-            center= {resultImage.data[0].center}
-            description= {resultImage.data[0].description}
-            date_created= {resultImage.data[0].date_created}>
-            </ResultCards>
-          )
-        })
-        this.setState({results: cardsHolder, meta: metadata, search: search})
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed")
-      }
+    console.log(this.props.results)
+    if (this.props.results.length == 0){
+      return 0;
+    }
+    const metadata = this.props.results.collection.metadata.total_hits
+    const results = this.props.results.collection.items
+    results.forEach((resultImage) => {
+    console.log(resultImage.links[0].href)
+    cardsHolder.push(
+    <ResultCards 
+      key= {resultImage.data[0].nasa_id}
+      id= {resultImage.data[0].nasa_id}
+      media_type= {resultImage.data[0].media_type}
+      image_href= {resultImage.links[0].href}
+      title= {resultImage.data[0].title}
+      center= {resultImage.data[0].center}
+      description= {resultImage.data[0].description}
+      date_created= {resultImage.data[0].date_created}
+    >
+    </ResultCards>
+    )
     })
+    this.setState({results: cardsHolder})
   }
   render(){
+    if (this.props.results.length == 0){
+          return (
+            <div>Search for something</div>
+          );
+    }
     return(
-      <React.Fragment>
-        <Row>
-        <h2 style={head}>
-        Results for "{this.state.search}"<br/>
-        <h5 style={head2}>
-        Total hits: {this.state.meta}
-        </h5>
-        </h2>
-        </Row>
-        <Row style={pad}>
-          {this.state.results}
-        </Row>
-      </React.Fragment>
+    <React.Fragment>
+    <Row>
+      {this.props.results.collection.items.map((result, key) => (
+      <ResultCards 
+        key= {result.data[0].nasa_id}
+        id= {result.data[0].nasa_id}
+        media_type= {result.data[0].media_type}
+        image_href= {result.links[0].href}
+        title= {result.data[0].title}
+        center= {result.data[0].center}
+        description= {result.data[0].description}
+        date_created= {result.data[0].date_created}
+      >
+      </ResultCards>
+      ))}
+    </Row>
+    </React.Fragment>
     );
   }
 }
-export default Results;
+function mapStateToProps(state){
+  console.log(state);
+  return {
+    results: state.results
+  };
+}
+export default withRouter(connect(mapStateToProps, null)(Results));

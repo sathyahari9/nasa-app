@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {searchResults} from "../actions";
+import {Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const search = {
   borderRadius: '10',
@@ -18,15 +20,21 @@ class Search extends Component{
     super(props);
     this.state = {
       value: "",
-      redirect: false
+      redirect: false,
     }
+    this.searchOnMedium()
     this.searchHandler = this.searchHandler.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
   }
-  setRedirect(){
+  setRedirect = () => {
     this.setState({
       redirect: true
     })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/search' />
+    }
   }
   searchHandler(event){
     console.log(event.target.value)
@@ -35,13 +43,9 @@ class Search extends Component{
     })
   }
   submitHandler(event){
+    this.searchOnMedium()
     this.setRedirect()
     event.preventDefault()
-  }
-  renderRedirect(){
-    if (this.state.redirect) {
-      return <Redirect to='./search' />
-    }
   }
   searchOnMedium = () => {
   let URL = "https://images-api.nasa.gov/search?media_type=image&q=" + this.state.value;
@@ -53,7 +57,8 @@ class Search extends Component{
     }
     }).then((response) => {
       response.json().then((data) => {
-        this.props.searchResults(data.items);
+        this.props.searchResults(data);
+        console.log(data)
       })
     }).catch((error) => console.log(error));
   }
@@ -61,10 +66,14 @@ class Search extends Component{
   render(){
     return(
       <div className="searchbar">
+      {this.renderRedirect()}
       <form onSubmit={this.submitHandler}>
         <InputGroup>
-        {this.renderRedirect}
-        <Input onChange={this.searchHandler} style={search} placeholder="Search for pictures" name="search"/>
+        <Input 
+        onChange={this.searchHandler} 
+        style={search} 
+        placeholder="Search for pictures" 
+        name="search"/>
         </InputGroup>
       </form>
       </div>
@@ -72,4 +81,4 @@ class Search extends Component{
   }
 }
 
-export default connect(null, {searchResults})(Search);
+export default withRouter(connect(null, {searchResults})(Search));

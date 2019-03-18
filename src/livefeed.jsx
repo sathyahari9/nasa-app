@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import SimpleMap from './components/map';
+import { withRouter } from 'react-router-dom';
 
 const frameWeb = {
   border: "0 none transparent",
@@ -55,4 +56,4 @@ class LiveFeed extends Component{
   }
 }
 
-export default LiveFeed;
+export default withRouter(LiveFeed);

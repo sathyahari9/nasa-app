@@ -3,6 +3,7 @@ import Search from './search';
 import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button} from 'reactstrap';
 import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
 import logo from '../logo.png';
+import { withRouter } from 'react-router-dom';
 
 const link = {
   color: "inherit",
@@ -22,14 +23,12 @@ class Menu extends Component{
           </Search>
         </Col>
         <Col xs="5">
-        <Router>
-          <div className="menuitms">
-            <Link exact to="/" style={link} className="menu-itm">Home</Link>
-            <Link exact to="/search" style={link} className="menu-itm">Photos</Link>
-            <Link exact to="/livefeed"style={link} className="menu-itm">Live Feed</Link>
-            <Link exact to="/login" style={link} className="menu-itm">Log in</Link>
-          </div>
-        </Router>
+        <div className="menuitms">
+          <Link to="/" style={link} className="menu-itm">Home</Link>
+          <Link to="/search" style={link} className="menu-itm">Photos</Link>
+          <Link to="/livefeed"style={link} className="menu-itm">Live Feed</Link>
+          <Link to="/login" style={link} className="menu-itm">Log in</Link>
+        </div>
         </Col>
       </Row>
       </div>
@@ -37,4 +36,4 @@ class Menu extends Component{
   }
 }
 
-export default Menu;
+export default withRouter(Menu);

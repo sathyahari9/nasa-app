@@ -5,6 +5,7 @@ import { Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 const bord = {
+  fontFamily: "Avenir",
   border: "none",
   boxShadow: "0 2px 5px rgba(0,0,0,0.08), 0 3px 7px rgba(0,0,0,0.16)",
   margin: "20px"
@@ -22,7 +23,7 @@ class ResultCards extends Component{
     return(
       <Col sm="12" md="3">
         <Card style={bord}>
-          <CardImg top width="100%" src={this.props.image_href} alt="Card image cap" />
+          <CardImg top width="auto" max-height="300px" src={this.props.image_href} alt="Card image cap" />
           <CardBody>
             <CardTitle><b>{this.props.title}</b></CardTitle>
             <CardSubtitle>Nasa_id: {this.props.id}</CardSubtitle>

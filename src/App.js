@@ -5,6 +5,7 @@ import Menu from './components/menu';
 import Results from './components/results';
 import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
 import LiveFeed from './livefeed';
+import Home from './components/home';
 // redux
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
@@ -17,10 +18,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Menu>
-        </Menu>
         <Router base path = "/">
+          <Menu>
+          </Menu>
           <Switch>
+            <Route exact path = "/" component={Home}>
+            </Route>
             <Route exact path = "/search" component={Results}>
             </Route>
             <Route exact path = "/livefeed" component={LiveFeed}>
