@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {searchResults} from "../actions";
+
 const search = {
   borderRadius: '10',
   border: '0.5px solid rgba(0,0,0,.0005)',
@@ -37,9 +40,24 @@ class Search extends Component{
   }
   renderRedirect(){
     if (this.state.redirect) {
-      return <Redirect to='/search' />
+      return <Redirect to='./search' />
     }
   }
+  searchOnMedium = () => {
+  let URL = "https://images-api.nasa.gov/search?media_type=image&q=" + this.state.value;
+  fetch(URL, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+    }).then((response) => {
+      response.json().then((data) => {
+        this.props.searchResults(data.items);
+      })
+    }).catch((error) => console.log(error));
+  }
+
   render(){
     return(
       <div className="searchbar">
@@ -54,4 +72,4 @@ class Search extends Component{
   }
 }
 
-export default Search;
+export default connect(null, {searchResults})(Search);

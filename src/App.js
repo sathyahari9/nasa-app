@@ -5,11 +5,18 @@ import Menu from './components/menu';
 import Results from './components/results';
 import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
 import LiveFeed from './livefeed';
+// redux
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
+store.subscribe(() => console.log('store', store.getState()));
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
+      <Provider store={store}>
         <Menu>
         </Menu>
         <Router base path = "/">
@@ -20,7 +27,7 @@ class App extends Component {
             </Route>
           </Switch>
         </Router>
-      </React.Fragment>
+      </Provider>
     );
   }
 }

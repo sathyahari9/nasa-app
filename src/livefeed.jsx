@@ -35,7 +35,7 @@ class LiveFeed extends Component{
       lat: this.state.latitude, 
       lng: this.state.longitude
       },
-      zoom: 2
+      zoom: 0
     }
     return(
       <div>
