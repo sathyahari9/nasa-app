@@ -37,8 +37,8 @@ class Home extends Component{
         Access pictures from the photos library.<br/> 
         Live position of the ISS.
         </h3>
-        <Button color="primary" style={newbut}>
-        View on Github
+        <Button color="primary" style={newbut} href="https://github.com/sathyahari9/nasa-app">
+          View on Github
         </Button>
       </Col>
       <Col sm="12" md="6">
