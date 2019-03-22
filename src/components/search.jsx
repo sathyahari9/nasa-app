@@ -44,7 +44,6 @@ class Search extends Component{
   }
   submitHandler(event){
     this.searchOnMedium()
-    this.setRedirect()
     event.preventDefault()
   }
   searchOnMedium = () => {
@@ -66,7 +65,7 @@ class Search extends Component{
   render(){
     return(
       <div className="searchbar">
-      {this.renderRedirect()}
+      {/* {this.renderRedirect()} */}
       <form onSubmit={this.submitHandler}>
         <InputGroup>
         <Input 

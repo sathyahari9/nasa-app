@@ -39,6 +39,7 @@ class LiveFeed extends Component{
       zoom: 0
     }
     return(
+      <React.Fragment>
       <div>
         <h1 style={top}>
           Current position tracking of the ISS
@@ -52,6 +53,7 @@ class LiveFeed extends Component{
         frameborder="0" style={frameWeb} align="center">
         </iframe>
       </div>
+      </React.Fragment>
     )
   }
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import Menu from './components/menu';
 import Results from './components/results';
 import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
@@ -10,6 +9,7 @@ import Home from './components/home';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './reducers';
+import './App.css';
 
 const store = createStore(rootReducer);
 store.subscribe(() => console.log('store', store.getState()));
