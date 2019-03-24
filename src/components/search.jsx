@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button, Collapse} from 'reactstrap';
 import {connect} from 'react-redux';
 import {searchResults} from "../actions";
-import {Redirect} from 'react-router-dom';
-import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, browserHistory, Route, Link, NavLink, Switch, withRouter } from 'react-router-dom';
 
 const search = {
   borderRadius: '10',
@@ -67,7 +65,7 @@ class Search extends Component{
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/search' />
+      return <Redirect to='./search' />
     }
   }
   searchHandler(event){
@@ -78,6 +76,7 @@ class Search extends Component{
   }
   submitHandler(event){
     this.searchOnMedium();
+    this.props.history.push("/search");
     event.preventDefault();
   }
   searchOnMedium = () => {
@@ -100,7 +99,7 @@ class Search extends Component{
     return(
       <React.Fragment>
       <div className="searchbar">
-      {/* {this.renderRedirect()} */}
+      {this.renderRedirect()}
       <form onSubmit={this.submitHandler} style={{ display: 'inline' }}>
         <InputGroup>
         <Input onClick={this.toggle} 
