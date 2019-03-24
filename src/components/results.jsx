@@ -4,6 +4,7 @@ import {Row} from 'reactstrap';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
+import Filters from './filters';
 
 const pad = {
   padding: "2em",

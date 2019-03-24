@@ -8,7 +8,7 @@ body{
 }
 .menu{
   width: 100vw;
-  height: 80px;
+  padding: 5px;
   border-bottom: .4px solid rgba(0,0,0,0.3);
 }
 .searchbar{
@@ -87,4 +87,16 @@ body{
     transform: scale(3);
     opacity: 0;
   }
+}
+.filters{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.filter{
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

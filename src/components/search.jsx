@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button} from 'reactstrap';
+import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button, Collapse} from 'reactstrap';
 import {connect} from 'react-redux';
 import {searchResults} from "../actions";
 import {Redirect} from 'react-router-dom';
@@ -21,10 +21,39 @@ class Search extends Component{
     this.state = {
       value: "",
       redirect: false,
+      location: "",
+      year_start: "",
+      year_end: "",
+      photographer: "",
+      collapse: false
     }
-    this.searchOnMedium()
-    this.searchHandler = this.searchHandler.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
+    this.searchOnMedium();
+    this.toggle = this.toggle.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
+  }
+  changeHandler(event){
+    if (event.target.name == "location")
+    {
+      this.setState({location: event.target.value})
+    }
+    else if (event.target.name == "year_end")
+    {
+      this.setState({year_end: event.target.value})
+    }
+    else if (event.target.name == "year_start")
+    {
+      this.setState({year_start: event.target.value})
+    }
+  }
+  handleSubmit(event){
+    this.performSearch();
+    event.preventDefault();
   }
   setRedirect = () => {
     this.setState({
@@ -47,7 +76,7 @@ class Search extends Component{
     event.preventDefault()
   }
   searchOnMedium = () => {
-  let URL = "https://images-api.nasa.gov/search?media_type=image&q=" + this.state.value;
+  let URL = "https://images-api.nasa.gov/search?media_type=image" + "&location=" + this.state.location;
   fetch(URL, {
     method: 'GET',
     headers: {
@@ -64,11 +93,12 @@ class Search extends Component{
 
   render(){
     return(
+      <React.Fragment>
       <div className="searchbar">
       {/* {this.renderRedirect()} */}
-      <form onSubmit={this.submitHandler}>
+      <form onSubmit={this.submitHandler} style={{ display: 'inline' }}>
         <InputGroup>
-        <Input 
+        <Input onClick={this.toggle} 
         onChange={this.searchHandler} 
         style={search} 
         placeholder="Search for pictures" 
@@ -76,6 +106,35 @@ class Search extends Component{
         </InputGroup>
       </form>
       </div>
+      <Collapse isOpen={this.state.collapse}>
+      <div className="filters">
+            <div className="filter">
+              <form onSubmit={this.handleSubmit} name="location">
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend">Location</InputGroupAddon>
+                    <Input onChange={this.changeHandler} placeholder="Cape Cavernal" />
+                </InputGroup>
+              </form>
+            </div>
+            <div className="filter">
+              <form onSubmit={this.handleSubmit} name="year_start">
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend">Start Date</InputGroupAddon>
+                    <Input onChange={this.changeHandler} name="location" placeholder="Cape Cavernal" />
+                </InputGroup>
+              </form>
+            </div>
+            <div className="filter">
+              <form onSubmit={this.handleSubmit} name="year_end">
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend">End Date</InputGroupAddon>
+                    <Input onChange={this.changeHandler} name="location" placeholder="Cape Cavernal" />
+                </InputGroup>
+              </form>
+            </div>
+          </div>
+        </Collapse>
+      </React.Fragment>
     );
   }
 }

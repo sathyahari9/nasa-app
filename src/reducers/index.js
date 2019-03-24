@@ -3,6 +3,7 @@ import {
   SEARCH_RESULTS,
 } from "../actions";
 
+
 function results(state = [], action) {
   switch (action.type) {
     case SEARCH_RESULTS:
