@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Row,Col, InputGroup, InputGroupAddon, InputGroupText, Input, Button, Collapse} from 'reactstrap';
 import {connect} from 'react-redux';
 import {searchResults} from "../actions";
-import { BrowserRouter as Router, Redirect, browserHistory, Route, Link, NavLink, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, browserHistory, Route, Link, NavLink, Switch, withRouter } from 'react-router';
 
 const search = {
   borderRadius: '10',
