@@ -5,12 +5,15 @@ import {BrowserRouter as Router, Route, Link, NavLink, Switch} from 'react-route
 import logo from '../logo.png';
 import { withRouter } from 'react-router-dom';
 
-const link = {
+var link = {
   color: "inherit",
   textDecoration: "none"
 }
 
 class Menu extends Component{
+  constructor(props){
+    super(props);
+  }
   render(){
     return(
       <div className="menu">
@@ -24,9 +27,9 @@ class Menu extends Component{
         </Col>
         <Col xs="5">
         <div className="menuitms">
-          <Link to="/" style={link} className="menu-itm">Home</Link>
-          <Link to="/search" style={link} className="menu-itm">Photos</Link>
-          <Link to="/livefeed"style={link} className="menu-itm">Live Feed</Link>
+          <Link to="/" style={link} className={"menu-itm"}>Home</Link>
+          <Link to="/search" style={link} className={"menu-itm"}>Photos</Link>
+          <Link to="/livefeed"style={link} className={"menu-itm"}>Live Feed</Link>
         </div>
         </Col>
       </Row>

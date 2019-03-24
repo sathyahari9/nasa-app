@@ -4,9 +4,10 @@ import {connect} from 'react-redux';
 import {searchResults} from "../actions";
 import { BrowserRouter as Router, Redirect, browserHistory, Route, Link, NavLink, Switch, withRouter } from 'react-router';
 
-const search = {
+var search = {
   borderRadius: '10',
-  border: '0.5px solid rgba(0,0,0,.0005)',
+  border: '1px solid rgba(0,0,0,.1)',
+  background: '#fff',
   boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.16)',
   padding: '25px',
   fontFamily: 'Avenir',

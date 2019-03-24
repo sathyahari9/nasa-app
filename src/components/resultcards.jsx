@@ -50,13 +50,15 @@ const bord = {
   fontFamily: "Avenir",
   border: "none",
   boxShadow: "0 2px 5px rgba(0,0,0,0.08), 0 3px 7px rgba(0,0,0,0.16)",
-  margin: "20px"
+  margin: "20px",
+  cursor: "pointer"
 }
 const curve = {
   borderRadius: "30px",
   paddingLeft: "15px",
   paddingRight: "15px"
 }
+let cardStyle;
 class ResultCards extends Component{
   constructor(props){
     super(props);
@@ -80,15 +82,18 @@ class ResultCards extends Component{
     return date;
   }
   render(){
+    cardStyle = {
+      background: "url(" + this.props.image_href + ")" ,
+      backgroundSize: "cover",
+    }
     return(
       <Col sm="12" md="3">
-        <Card style={bord}>
-          <CardImg top width="auto" height="300px" src={this.props.image_href} alt="Card image cap" />
+        <Card style={bord} onClick={this.toggle}>
+          <div className="card-img" style={cardStyle}>
+          </div>
           <CardBody>
             <CardTitle><b>{this.props.title}</b></CardTitle>
-            <CardSubtitle>Nasa_id: {this.props.id}</CardSubtitle>
             <CardText>Center: {this.props.center}</CardText>
-            <Button color= "primary" style={curve} onClick={this.toggle}>View Image</Button>
             <Modal style={fonts} isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader toggle={this.toggle}><b>{this.props.title}</b></ModalHeader>
               <ModalBody style={mods} scrollable={true}>

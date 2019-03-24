@@ -5,17 +5,19 @@ import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import Filters from './filters';
+import Menu from './menu';
 
 const pad = {
   padding: "2em",
   fontFamily: "Avenir",
 }
 const head = {
-  padding: "1.5em 2em 0em 2em",
+  padding: "2.5em 2em 1em 3.5em",
   fontFamily: "Avenir",
+  textAlign:"center"
 }
 const head2 = {
-  marginTop: "15px",
+  padding: "0em 2em 1em 3.5em",
   fontFamily: "Avenir",
 }
 class Results extends Component{
@@ -57,14 +59,25 @@ class Results extends Component{
     })
     this.setState({results: cardsHolder})
   }
+  emptySearch(){
+      if(this.props.results.collection.items.length == 0){
+        return (
+          <React.Fragment>
+          <br/>
+          <p>There were no images for your search</p>
+          </React.Fragment>
+        )
+      }
+  }
   render(){
-    if (this.props.results.length == 0){
-          return (
-            <div>Search for something</div>
-          );
-    }
     return(
     <React.Fragment>
+    <Row style={head}>
+    <h1>Search for images in the search bar above</h1><br/>
+    </Row>
+    <Row style={head2}>
+    <h3>Total hits: {this.props.results.collection.metadata.total_hits}</h3>
+    </Row>
     <Row>
       {this.props.results.collection.items.map((result, key) => (
       <ResultCards 
