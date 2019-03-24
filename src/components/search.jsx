@@ -76,7 +76,7 @@ class Search extends Component{
     event.preventDefault()
   }
   searchOnMedium = () => {
-  let URL = "https://images-api.nasa.gov/search?media_type=image" + "&location=" + this.state.location;
+  let URL = "https://images-api.nasa.gov/search?media_type=image&q="+ this.state.value + "&location=" + this.state.location;
   fetch(URL, {
     method: 'GET',
     headers: {
