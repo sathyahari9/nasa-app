@@ -56,6 +56,7 @@ class Search extends Component{
   }
   handleSubmit(event){
     this.searchOnMedium();
+    this.props.history.push("/search");    
     event.preventDefault();
   }
   setRedirect = () => {
@@ -69,7 +70,6 @@ class Search extends Component{
     }
   }
   searchHandler(event){
-    console.log(event.target.value);
     this.setState({
       value: event.target.value,
     });
