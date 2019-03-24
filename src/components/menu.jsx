@@ -27,7 +27,6 @@ class Menu extends Component{
           <Link to="/" style={link} className="menu-itm">Home</Link>
           <Link to="/search" style={link} className="menu-itm">Photos</Link>
           <Link to="/livefeed"style={link} className="menu-itm">Live Feed</Link>
-          <Link to="/login" style={link} className="menu-itm">Log in</Link>
         </div>
         </Col>
       </Row>

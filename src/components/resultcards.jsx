@@ -3,11 +3,37 @@ import Search from './search';
 import logo from '../logo.png';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button } from 'reactstrap';
+import {
+  FacebookShareButton,
+  FacebookShareCount,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  FacebookIcon,
+  EmailIcon,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  ViberShareButton,
+  WorkplaceShareButton,
+  LineShareButton,
+  EmailShareButton,
+} from 'react-share';
 
 const mods = {
   padding: "1.5em",
   height: "500px",
   overflowY: "scroll",
+}
+const share = {
+  cursor: "pointer",
 }
 const fonts = {
   fontFamily: "Avenir",
@@ -72,6 +98,33 @@ class ResultCards extends Component{
                <p style={space}><h5><b>Description:</b></h5>{this.props.description}</p>
               </ModalBody>
               <ModalFooter>
+                <TwitterShareButton
+                  style={share}
+                  url={this.props.image_href}
+                  title={this.props.title}
+                  className="Demo__some-network__share-button">
+                  <TwitterIcon
+                    size={32}
+                    round />
+                </TwitterShareButton>
+                <FacebookShareButton
+                  style={share}
+                  url={this.props.image_href}
+                  title={this.props.title}
+                  className="Demo__some-network__share-button">
+                  <FacebookIcon
+                    size={32}
+                    round />
+                </FacebookShareButton>
+                <EmailShareButton
+                  style={share}
+                  url={this.props.image_href}
+                  title={this.props.title}
+                  className="Demo__some-network__share-button">
+                  <EmailIcon
+                    size={32}
+                    round />
+                </EmailShareButton>
                 <Button color="primary" style={curve} href={this.props.image_href}>Download</Button>{' '}
                 <Button color="secondary" style={curve} onClick={this.toggle}>Cancel</Button>
               </ModalFooter>
