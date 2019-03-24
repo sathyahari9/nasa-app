@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import planets from '../solar-system.png';
 import Menu from './menu';
 const headers = {
-  paddingTop: "5em",
+  paddingTop: "4.5em",
   textAlign: "center"
 }
 const newbut = {
@@ -50,7 +50,7 @@ class Home extends Component{
       </Col>
       </Row>
       <Row>
-      <Col sm="12" md={{size: 8, offset: 2}} style={{textAlign: "center", marginTop:"50px"}}>
+      <Col sm="12" md={{size: 8, offset: 2}} style={{textAlign: "center", marginTop:"55px"}}>
         <h3 style={{fontWeight: "400"}}>
         Built using
         </h3>

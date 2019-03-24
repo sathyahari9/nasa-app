@@ -73,12 +73,12 @@ class Results extends Component{
     return(
     <React.Fragment>
     <Row style={head}>
-    <h1>Search for images in the search bar above</h1><br/>
+    <h2>Search for images in the search bar above. Click on an image to expand.</h2><br/>
     </Row>
     <Row style={head2}>
     <h3>Total hits: {this.props.results.collection.metadata.total_hits}</h3>
     </Row>
-    <Row>
+    <Row style={{padding: "0em 3em 3em 3em"}}>
       {this.props.results.collection.items.map((result, key) => (
       <ResultCards 
         key= {result.data[0].nasa_id}
