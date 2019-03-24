@@ -22,8 +22,8 @@ class Search extends Component{
       value: "",
       redirect: false,
       location: "",
-      year_start: "",
-      year_end: "",
+      year_start: "1900",
+      year_end: "2019",
       photographer: "",
       collapse: false
     }
@@ -38,21 +38,26 @@ class Search extends Component{
     this.setState(state => ({ collapse: !state.collapse }));
   }
   changeHandler(event){
-    if (event.target.name == "location")
+    console.log(event.target.value)
+    if (event.target.name === "location")
     {
       this.setState({location: event.target.value})
+      console.log(event.target.value)
     }
-    else if (event.target.name == "year_end")
+    console.log(event.target.value)
+    if (event.target.name === "year_end")
     {
       this.setState({year_end: event.target.value})
+      console.log(event.target.value)
     }
-    else if (event.target.name == "year_start")
+    else if (event.target.name === "year_start")
     {
       this.setState({year_start: event.target.value})
+      console.log(event.target.value)
     }
   }
   handleSubmit(event){
-    this.performSearch();
+    this.searchOnMedium();
     event.preventDefault();
   }
   setRedirect = () => {
@@ -66,17 +71,17 @@ class Search extends Component{
     }
   }
   searchHandler(event){
-    console.log(event.target.value)
+    console.log(event.target.value);
     this.setState({
       value: event.target.value,
-    })
+    });
   }
   submitHandler(event){
-    this.searchOnMedium()
-    event.preventDefault()
+    this.searchOnMedium();
+    event.preventDefault();
   }
   searchOnMedium = () => {
-  let URL = "https://images-api.nasa.gov/search?media_type=image&q="+ this.state.value + "&location=" + this.state.location;
+  let URL = "https://images-api.nasa.gov/search?media_type=image&q="+ this.state.value + "&location=" + this.state.location + "&year_end=" + this.state.year_end + "&year_start=" + this.state.year_start;
   fetch(URL, {
     method: 'GET',
     headers: {
@@ -112,7 +117,7 @@ class Search extends Component{
               <form onSubmit={this.handleSubmit} name="location">
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">Location</InputGroupAddon>
-                    <Input onChange={this.changeHandler} placeholder="Cape Cavernal" />
+                    <Input onChange={this.changeHandler} name="location" placeholder="Cape Cavernal" />
                 </InputGroup>
               </form>
             </div>
@@ -120,7 +125,7 @@ class Search extends Component{
               <form onSubmit={this.handleSubmit} name="year_start">
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">Start Date</InputGroupAddon>
-                    <Input onChange={this.changeHandler} name="location" placeholder="Cape Cavernal" />
+                    <Input onChange={this.changeHandler} name="year_start" placeholder="2000" />
                 </InputGroup>
               </form>
             </div>
@@ -128,7 +133,7 @@ class Search extends Component{
               <form onSubmit={this.handleSubmit} name="year_end">
                 <InputGroup>
                     <InputGroupAddon addonType="prepend">End Date</InputGroupAddon>
-                    <Input onChange={this.changeHandler} name="location" placeholder="Cape Cavernal" />
+                    <Input onChange={this.changeHandler} name="year_end" placeholder="2022" />
                 </InputGroup>
               </form>
             </div>
