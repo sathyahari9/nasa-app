@@ -7,19 +7,6 @@ import {connect} from 'react-redux';
 import Filters from './filters';
 import Menu from './menu';
 
-const pad = {
-  padding: "2em",
-  fontFamily: "Avenir",
-}
-const head = {
-  padding: "2.5em 2em 1em 3.5em",
-  fontFamily: "Avenir",
-  textAlign:"center"
-}
-const head2 = {
-  padding: "0em 2em 1em 3.5em",
-  fontFamily: "Avenir",
-}
 class Results extends Component{
   constructor(props){
     super(props);
@@ -72,10 +59,10 @@ class Results extends Component{
   render(){
     return(
     <React.Fragment>
-    <Row style={head}>
+    <Row style={{padding: "2.5em 2em 1em 3.5em", fontWeight: "300"}}>
     <h2>Search for images in the search bar above. Click on an image to expand.</h2><br/>
     </Row>
-    <Row style={head2}>
+    <Row style={{padding: "0em 2em 1em 3.5em", fontWeight: "300"}}>
     <h3>Total hits: {this.props.results.collection.metadata.total_hits}</h3>
     </Row>
     <Row style={{padding: "0em 3em 3em 3em"}}>

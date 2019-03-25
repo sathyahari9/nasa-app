@@ -3,16 +3,6 @@ import $ from 'jquery';
 import SimpleMap from './components/map';
 import { withRouter } from 'react-router-dom';
 
-const frameWeb = {
-  border: "0 none transparent",
-  margin: "20px",
-  display: "none"
-}
-const top = {
-  margin: "40px",
-  textAlign: "center",
-  fontFamily: "Avenir"
-}
 class LiveFeed extends Component{
   constructor(props){
     super(props);
@@ -41,7 +31,11 @@ class LiveFeed extends Component{
     return(
       <React.Fragment>
       <div>
-        <h1 style={top}>
+        <h1 style={{
+          margin: "40px",
+          textAlign: "center",
+          fontFamily: "Avenir"
+        }}>
           Current position tracking of the ISS
         </h1>
         <SimpleMap 
@@ -50,7 +44,11 @@ class LiveFeed extends Component{
         </SimpleMap>
         <iframe width="480" height="270" src="https://www.ustream.tv/embed/9408562?html5ui" 
         scrolling="no" allowfullscreen webkitallowfullscreen 
-        frameborder="0" style={frameWeb} align="center">
+        frameborder="0" style={{
+          border: "0 none transparent",
+          margin: "20px",
+          display: "none"
+        }} align="center">
         </iframe>
       </div>
       </React.Fragment>
